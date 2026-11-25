@@ -1,51 +1,8 @@
-# Curso Spring AI: de inicio a avanzado
+# Notas del curso
 
-Stack: Java 25, Spring Boot 4.2.0, Spring AI 2.1.0, OpenAI. PGVector con Docker en el módulo 5.
-Prerrequisito: conocer Spring Boot.
+El índice de módulos y la preparación están en el [README](README.md).
 
-Cada módulo es un proyecto Maven con su `README.md` (teoría, cómo ejecutarlo y ejercicios en tres niveles:
-Básico, Intermedio y Avanzado). El proyecto guía es el asistente de soporte de la tienda ficticia Acme.
-
-| # | Módulo | Puerto | Básico | Intermedio | Avanzado |
-|---|--------|--------|--------|------------|----------|
-| 1 | [`m01-primer-chat`](m01-primer-chat) | 8080 | `ChatClient` y primer endpoint | Modelo y temperatura por propiedades | Tokens y costo por llamada |
-| 2 | [`m02-chatclient`](m02-chatclient) | 8082 | System prompt y `PromptTemplate` | Streaming SSE y opciones por request | Metadata y uso de tokens |
-| 3 | [`m03-salidas-estructuradas`](m03-salidas-estructuradas) | 8083 | Respuesta a record con enums | Listas y Bean Validation | Reintento con `StructuredOutputValidationAdvisor` |
-| 4 | [`m04-memoria-advisors`](m04-memoria-advisors) | 8084 | Session memory en RAM | Session memory JDBC | Advisor propio de PII y compactación con resumen |
-| 5 | [`m05-rag`](m05-rag) | 8085 | ETL y búsqueda por similitud | PDF, `QuestionAnswerAdvisor` y filtros | RAG modular con reescritura de consulta |
-| 6 | [`m06-tool-calling`](m06-tool-calling) | 8086 | `@Tool` simple | Tools con JDBC y API REST | Confirmación humana, propiedad y anti-replay |
-| 7a | [`m07-mcp-server`](m07-mcp-server) | 8087 | Tools MCP | Resources y prompts | Token y validación de `Origin` |
-| 7b | [`m07-mcp-client-agentes`](m07-mcp-client-agentes) | 8088 | Cliente MCP | Encadenamiento y enrutamiento | Orquestador-trabajadores y evaluador-optimizador |
-| 8 | [`m08-multimodal`](m08-multimodal) | 8089 | Visión | Voz a texto, texto a voz e imágenes | Reclamo con foto y voz, resistente a manipulación |
-| 9 | [`m09-produccion`](m09-produccion) | 8090 | Métricas y Prometheus | Moderación, caché y evaluación | Presupuesto por usuario, resiliencia y evals con dato esperado |
-
-## Preparación
-```bash
-# 1. Clave de OpenAI en ~/.openai.env (ver el módulo 1)
-source ~/.openai.env
-
-# 2. Compilar y ejecutar todas las pruebas (no necesitan API key; el módulo 5 necesita Docker)
-mvn test
-
-# 3. Ejecutar un módulo
-mvn -pl m02-chatclient spring-boot:run
-```
-El módulo 7 necesita además `export ACME_MCP_TOKEN=$(openssl rand -hex 24)`, el mismo valor en el servidor y en el cliente.
-
-## Modelos usados
-| Uso | Modelo |
-|---|---|
-| Chat | `gpt-4o-mini` |
-| Visión para reclamos (m08) | `gpt-4o` |
-| Embeddings (m05) | `text-embedding-3-small` |
-| Voz a texto / texto a voz (m08) | `gpt-4o-mini-transcribe` / `gpt-4o-mini-tts` |
-| Imágenes (m08) | `gpt-image-1-mini` |
-
-Los modelos se retiran: `gpt-image-1` ya no estaba disponible al probar el módulo 8. Lista los vigentes con
-`curl https://api.openai.com/v1/models -H "Authorization: Bearer $OPENAI_API_KEY"`.
-Fija un límite mensual de gasto en el panel de OpenAI.
-
-## Hilo conductor: lo que solo se descubre con el modelo real
+## Lo que solo se descubre con el modelo real
 Todas las pruebas automáticas usan modelos simulados. Al ejecutar cada módulo con OpenAI aparecieron fallas que
 esas pruebas no detectan. Cada README documenta las suyas, y son la parte más valiosa del curso:
 
